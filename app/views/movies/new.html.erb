@@ -1,8 +1,28 @@
-<h1>New Movie To Add</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= render 'form' %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Movie To Add</title>
+  <%= stylesheet_link_tag 'new_movie_styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- You can include other stylesheets or inline styles here -->
+</head>
 
-<%#= render 'form', form: form %>
+<body>
 
+  <header>
+    <h1>New Movie To Add</h1>
+  </header>
 
-<%= link_to 'Back', movies_path %>
+  <main>
+    <%= render 'form' %>
+  </main>
+
+  <footer>
+    <%= link_to 'Back', movies_path %>
+  </footer>
+
+</body>
+
+</html>

@@ -1,15 +1,40 @@
-<h1><%= @movie.title %></h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<div>
-  <p><strong>Description:</strong> <%= @movie.description %></p>
-  <% if @movie.picture.attached? %>
-    <%= image_tag @movie.picture %>
-  <% end %>
-</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @movie.title %></title>
+  <%= stylesheet_link_tag 'show_movie_styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- You can include other stylesheets or inline styles here -->
+</head>
 
-<div>
-  <h2>Reviews</h2>
-  <%= render @movie.reviews %>
-</div>
+<body>
 
-<%= render 'reviews/form', movie: @movie %>
+  <header>
+    <h1><%= @movie.title %></h1>
+  </header>
+
+  <main>
+    <div class="movie-details">
+      <p><strong>Description:</strong> <%= @movie.description %></p>
+      <% if @movie.picture.attached? %>
+        <%= image_tag @movie.picture %>
+      <% end %>
+    </div>
+
+    <div class="reviews-section">
+      <h2>Reviews</h2>
+      <%= render @movie.reviews %>
+    </div>
+
+    <%= render 'reviews/form', movie: @movie %>
+  </main>
+
+  <footer>
+    <%= link_to 'Back', movies_path %>
+  </footer>
+
+</body>
+
+</html>

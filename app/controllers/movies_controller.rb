@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
   
     def index
-      @movies = Movie.page(params[:page]).per(10)
+      @movies = Movie.page(params[:page]).per(5)
     end
   
     def show

@@ -1,11 +1,36 @@
-<h1>Movies</h1>
+<!-- app/views/movies/index.html.erb -->
 
-<% @movies.each do |movie| %>
-  <div>
-    <h2><%= link_to movie.title, movie %></h2>
-    <p><%= movie.description %></p>
-    <%= link_to "Read Reviews", movie_path(movie) %>
-  </div>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= paginate @movies %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <%= stylesheet_link_tag 'index_styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <!-- You can include other stylesheets or inline styles here -->
+</head>
+
+<body>
+
+  <header>
+    <h1>Movies</h1>
+  </header>
+
+  <main>
+    <% @movies.each do |movie| %>
+      <div class="movie">
+        <h2><%= link_to movie.title, movie %></h2>
+        <p><%= movie.description %></p>
+        <%= link_to "Read Reviews", movie_path(movie) %>
+      </div>
+    <% end %>
+  </main>
+
+  <footer>
+    <%= paginate @movies %>
+  </footer>
+
+</body>
+
+</html>
