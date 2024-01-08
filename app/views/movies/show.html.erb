@@ -1,0 +1,15 @@
+<h1><%= @movie.title %></h1>
+
+<div>
+  <p><strong>Description:</strong> <%= @movie.description %></p>
+  <% if @movie.picture.attached? %>
+    <%= image_tag @movie.picture %>
+  <% end %>
+</div>
+
+<div>
+  <h2>Reviews</h2>
+  <%= render @movie.reviews %>
+</div>
+
+<%= render 'reviews/form', movie: @movie %>

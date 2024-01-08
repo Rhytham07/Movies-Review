@@ -1,0 +1,11 @@
+<h1>Movies</h1>
+
+<% @movies.each do |movie| %>
+  <div>
+    <h2><%= link_to movie.title, movie %></h2>
+    <p><%= movie.description %></p>
+    <%= link_to "Read Reviews", movie_path(movie) %>
+  </div>
+<% end %>
+
+<%= paginate @movies %>

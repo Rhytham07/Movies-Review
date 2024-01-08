@@ -1,0 +1,28 @@
+<%= form_with(model: [@movie, @review], local: true, url: movie_reviews_path(@movie)) do |form| %>
+    <% if @review.errors.any? %>
+      <div>
+        <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+  
+        <ul>
+          <% @review.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div>
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    </div>
+  
+    <div>
+      <%= form.label :rating %>
+      <%= form.number_field :rating, in: 1..5 %>
+    </div>
+  
+    <div>
+      <%= form.submit 'Add Review' %>
+    </div>
+  <% end %>
+  
