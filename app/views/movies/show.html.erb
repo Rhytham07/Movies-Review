@@ -28,6 +28,14 @@
       <%= render @movie.reviews %>
     </div>
 
+    <% if user_signed_in? && @movie.user_id == current_user.id%>
+  <div class="text-right">
+    <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-primary' %>
+    <%= button_to 'Delete', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
+<% end %>
+
+
     <%= render 'reviews/form', movie: @movie %>
   </main>
 
