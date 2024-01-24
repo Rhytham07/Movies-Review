@@ -1,13 +1,15 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
     @movies = Movie.page(params[:page]).per(5)
   end
 
   def show
-    @review = Review.new(movie: @movie)
+    # @review = Review.new(movie: @movie)
   end
 
   def new
@@ -15,9 +17,10 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
-    @movie.user_id = current_user.id
+    @movie = Movie.new(movie_params.merge(user_id: current_user.id))
+
     if @movie.save
+      UserMailer.with(user: current_user).registration_confirmation.deliver
       redirect_to @movie, notice: 'Movie was successfully created.'
     else
       render :new
@@ -25,45 +28,35 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    
+    authorize @movie
   end
 
   def update
-    @movie = Movie.find(params[:id])
     authorize @movie
-    if @movie.present? && @movie.user_id == current_user.id
-      if @movie.update(movie_params)
-        redirect_to @movie, notice: 'Movie was successfully updated.'
-      else
-        render :edit
-      end
+
+    if @movie.update(movie_params)
+      redirect_to @movie, notice: 'Movie was successfully updated.'
     else
-      redirect_to movies_path, notice: "you are not authorised to update this movie"
+      render :edit
     end
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
     authorize @movie
+
     if @movie.destroy
       redirect_to movies_url, notice: 'Movie was successfully deleted.'
     else
-      redirect_to movies_path, notice: "you cant able to deleted this movie"
+      redirect_to movies_path, notice: 'You cannot delete this movie.'
     end
   end
 
-  
+  private
 
-  
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
-private
-
-def user_not_authorized
-  flash[:alert] = "You are not authorized to perform this action."
-  redirect_to(request.referrer || root_path)
-end
-
+  def user_not_authorized
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_to(request.referrer || root_path)
+  end
 
   def set_movie
     @movie = Movie.find(params[:id])

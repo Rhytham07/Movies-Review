@@ -5,4 +5,6 @@ class Movie < ApplicationRecord
   
   validates :title, presence: true
   validates :description, presence: true
+  validates :rating,presence:true, numericality: {only_integer:true, greater_then_or_eqal_to: 5}
+  
 end

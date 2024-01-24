@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   resources :movies do
     resources :reviews
   end
+
+  
+  # get 'movies/new', to: 'movies#new', as: 'new_movie'
 end

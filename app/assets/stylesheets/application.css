@@ -13,4 +13,19 @@
   .text-right {
     text-align: right;
   }
+  .star-rating {
+    display: flex;
+  }
   
+  .star {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-image: url('star.png'); 
+    background-size: cover;
+  }
+  
+  .star:hover,
+  .star:hover ~ .star {
+    background-image: url('star-filled.png'); 
+  }
