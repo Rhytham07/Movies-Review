@@ -1,0 +1,22 @@
+<h1>List of Cast Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Date of Birth</th>
+      <!-- Add other relevant column headers -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @casts.each do |cast| %>
+      <tr>
+        <td><%= cast.first_name %></td>
+        <td><%= cast.last_name %></td>
+        <td><%= cast.date_of_birth %></td>
+        <!-- Add other relevant data cells -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

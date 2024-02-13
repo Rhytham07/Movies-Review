@@ -1,0 +1,19 @@
+<!-- app/views/reviews/new.html.erb -->
+
+<%= form_with(model: @review, local: true) do |form| %>
+  <!-- other form fields... -->
+
+  <div class="field">
+    <%= form.label :stars %>
+    <%= form.number_field :stars, in: 1..5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<h1>Add Star Cast</h1>
+
+<%= form_with(model: [@movie, StarCast.new], url: movie_star_casts_path(@movie), local: true) do |form| %>
+  <% if @star_cast.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@star_cast.errors.count, "error") %> prohibited this star cast member from being saved:</h2>
+      <ul>
+        <% @star_cast.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :cast_id, "Select Cast Member" %>
+    <%= form.collection_select :cast_id, Cast.all, :id, :first_name, prompt: "Select a cast member" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role_name %>
+    <%= form.text_field :role_name %>
+  </div>
+
+
+
+  <div class="field">
+    <%= form.label :cast_id, "Select movie" %>
+    <%= form.collection_select :movie_id, Movie.all, :id, :title, prompt: "Select a movie" %>
+  </div>
+
+  <!-- Add other fields as needed -->
+
+  <div class="actions">
+    <%= form.submit "Add Star Cast" %>
+  </div>
+<% end %>

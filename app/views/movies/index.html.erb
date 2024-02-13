@@ -11,18 +11,46 @@
 
 <body>
 
-  <header>
+  <header>  
     <h1>Movies</h1>
   </header>
+  <button type="button" class="unique-button" onclick="location.href = 'http://127.0.0.1:3000/movies/new';">New Movie</button>
+  <%= link_to 'Add Cast', new_cast_path %>
 
   <main>
+  
     <% @movies.each do |movie| %>
       <div class="movie">
-        <h2><%= link_to movie.title, movie %></h2>
-        <p><%= movie.description %></p>
+        <h2><%= link_to movie.title, movie_path(movie.id) %></h2>
+        <h4><%= "Total Reviews:#{movie.reviews.count}" %></h4>
+        
+        <% if movie.reviews.count > 0 %>
+          <h4>
+            <% avg_rating = movie.reviews.pluck(:rating).sum / movie.reviews.count %>
+            <%= "Avg Rating: " %>
+            <% avg_rating.times do %>
+              ⭐
+            <% end %>
+            
+          </h4>
+        <% else %>
+          <h4><%= "Avg Rating: No reviews yet*" %></h4>
+        <% end %>
+
         <%= link_to "Read Reviews", movie_path(movie) %>
+        <%= link_to 'Add Star Cast Member', new_movie_star_cast_path(movie_id: movie.id) %>
+        <% movie.star_cast.each do |star_cast| %>
+          <%= link_to 'View Star Cast Details', movie_star_cast_path(movie_id: movie.id, id: star_cast.id) %>
+        <% end %>
+
+      </div>
+      <div class="movie-details">
+        <% if movie.picture.attached? %>
+          <%= image_tag movie.picture, style: "width:100px;height:100px" %>
+        <% end %>
       </div>
     <% end %>
+
   </main>
 
   <footer>

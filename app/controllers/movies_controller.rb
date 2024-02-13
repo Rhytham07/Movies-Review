@@ -5,11 +5,13 @@ class MoviesController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    @movies = Movie.page(params[:page]).per(5)
+
+    @movies = Movie.all
   end
 
   def show
-    # @review = Review.new(movie: @movie)
+    @review = Review.new(movie: @movie)
+    render json: @review
   end
 
   def new
@@ -28,11 +30,9 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    authorize @movie
   end
 
   def update
-    authorize @movie
 
     if @movie.update(movie_params)
       redirect_to @movie, notice: 'Movie was successfully updated.'
@@ -42,7 +42,6 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    authorize @movie
 
     if @movie.destroy
       redirect_to movies_url, notice: 'Movie was successfully deleted.'

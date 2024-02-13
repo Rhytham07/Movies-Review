@@ -1,0 +1,22 @@
+<h1>List of Star Cast Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Actor/Actress Name</th>
+      <th>Movie</th>
+      <th>Role</th>
+      <!-- Add other relevant column headers -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @star_casts.each do |star_cast| %>
+      <tr>
+        <td><%= star_cast.actor_name %></td>
+        <td><%= star_cast.movie.title %></td>
+        <td><%= star_cast.role %></td>
+        <!-- Add other relevant data cells -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

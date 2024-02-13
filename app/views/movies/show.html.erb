@@ -34,9 +34,8 @@
         <%= button_to 'Delete', @movie, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       </div>
     <% end %>
-
-
     <%= render 'reviews/form', movie: @movie %>
+    <%= render 'casts/form', movie: @movie %>
   </main>
 
   <footer>

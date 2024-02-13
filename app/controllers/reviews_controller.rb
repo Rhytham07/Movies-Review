@@ -4,13 +4,17 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
 
   def create
-    @review = @movie.reviews.new(review_params)
-    @review.user = current_user
-
-    if @review.save
-      redirect_to @movie, notice: 'Review was successfully created.'
+    if current_user != @movie.user
+      @review = @movie.reviews.new(review_params)
+      @review.user = current_user
+      
+      if @review.save
+        redirect_to @movie, notice: 'Review was successfully created.'
+      else
+        redirect_to @movie, alert: 'Review could not be saved.'
+      end
     else
-      redirect_to @movie, alert: 'Review could not be saved.'
+      redirect_to @movie, alert: 'You cannot give a review for your own movie.'
     end
   end
 

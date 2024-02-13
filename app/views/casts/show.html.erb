@@ -1,0 +1,21 @@
+<h1>Cast Member Details</h1>
+
+<div>
+  <strong>First Name:</strong>
+  <%= @cast.first_name %>
+</div>
+
+<div>
+  <strong>Last Name:</strong>
+  <%= @cast.last_name %>
+</div>
+
+<div>
+  <strong>Date of Birth:</strong>
+  <%= @cast.date_of_birth %>
+</div>
+
+<!-- Add other attributes as needed -->
+
+<%= link_to 'Edit', edit_cast_path %> |
+<%= link_to 'Back', casts_path(@movie) %>

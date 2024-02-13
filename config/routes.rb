@@ -4,8 +4,11 @@ Rails.application.routes.draw do
 
   resources :movies do
     resources :reviews
+    # resources :casts, only: [:new, :create, :show] 
+    resources :star_casts 
   end
+  resources :casts
 
   
-  # get 'movies/new', to: 'movies#new', as: 'new_movie'
+  
 end

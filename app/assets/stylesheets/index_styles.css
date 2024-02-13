@@ -1,5 +1,3 @@
-
-
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
@@ -90,5 +88,26 @@ footer {
 
 .pagination a:hover {
   background-color: #555;
+}
+header {
+  position: relative;
+}
+
+.unique-button {
+  position: absolute;
+  top: 140px; 
+  right: 1px; 
+  background-color: #3498db; 
+  color: #fff; 
+  border: 2px solid #3498db; 
+  padding: 10px 15px; 
+  cursor: pointer;
+  border-radius: 5px; 
+  font-weight: bold;
+}
+
+.unique-button:hover {
+  background-color: #2980b9; 
+  border-color: #2980b9; 
 }
 
